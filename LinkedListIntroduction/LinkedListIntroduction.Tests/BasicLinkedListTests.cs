@@ -111,14 +111,4 @@ public sealed class BasicLinkedListTests
             Assert.AreEqual("{1, 2}", list1.ToString());
         }
 
-        [TestMethod]
-        public void TestMerge()
-        { 
-            IntegerLinkedList list1 = new IntegerLinkedList(1);
-            list1.Append(3);
-            IntegerLinkedList list2 = new IntegerLinkedList(2);
-            list2.Append(4);
-            list1.MergeAlternating(list2);
-            Assert.AreEqual("{1, 2, 3, 4}", list1.ToString());
-        }
 }

@@ -30,10 +30,6 @@ public class IntegerNode
         return _next != null && _next.Contains(v);
     }
 
-    public override string ToString()
-    {
-        return _next == null ? _value.ToString() : $"{_value}, {_next}";
-    }
 }
 
 
@@ -129,7 +125,17 @@ public class IntegerLinkedList
         current._next = other._head;
     }
 
-    public bool Contains(int v) => _head != null && _head.Contains(v);
+     public bool Contains(int v)
+    {
+        IntegerNode current = _head;
+
+        while(current != null)
+        {
+            if(current._value == v) return true;
+            current = current._next;
+        }
+        return false;
+    }
 
     public void RemoveDuplicates()
     {
@@ -140,7 +146,7 @@ public class IntegerLinkedList
             while (runner._next != null)
             {
                 if (runner._next._value == current._value)
-                    runner._next = runner._next._next; // Delete duplicate
+                    runner._next = runner._next._next; 
                 else
                     runner = runner._next;
             }
@@ -159,53 +165,19 @@ public class IntegerLinkedList
         }
         return newList;
     }
-
-    public void MergeAlternating(IntegerLinkedList other)
-    {
-        if (_head == null) { _head = other._head; return; }
-        if (other._head == null) return;
-
-        IntegerNode curr1 = _head;
-        IntegerNode curr2 = other._head;
-
-        while (curr1 != null && curr2 != null)
-        {
-            IntegerNode next1 = curr1._next;
-            IntegerNode next2 = curr2._next;
-
-    
-            curr1._next = curr2;
-        
-            if (next1 != null)
-            {
-                curr2._next = next1;
-            }
-
-            curr1 = next1;
-            curr2 = next2;
-        }
-    }
-
     public override string ToString() => _head == null ? "{}" : $"{{{_head}}}";
 }
-
-
-
-
-
 
 public class SortedIntegerLinkedList : IntegerLinkedList
 {
     public void AddSorted(int v)
     {
-        // Case 1: List is empty or new value is smaller than head
         if (_head == null || v < _head._value)
         {
             Prepend(v);
             return;
         }
 
-        // Case 2: Find the position where current < v and next > v
         IntegerNode current = _head;
         while (current._next != null && current._next._value < v)
         {
