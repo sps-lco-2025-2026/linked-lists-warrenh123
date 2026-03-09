@@ -37,7 +37,7 @@ public class IntegerNode
     int _value;
     IntegerNode _next;
 
-     internal int Count => _next == null ? 1 : 1 + _next.Count;
+    internal int Count => _next == null ? 1 : 1 + _next.Count;
             
     internal int Sum => _next == null ? _value : _value + _next.Sum;
 
@@ -56,9 +56,18 @@ public class IntegerNode
             _next.Append(v);
     }
 
+    internal void Prepend(int i)
+    {
+        IntegerNode newNode = new IntegerNode(_value);
+        newNode._next = _next;
+
+        _value = i;
+        _next = newNode;
+    }
+
+
     public override string ToString()
     {
         return _next == null ? _value.ToString() : $"{_value}, {_next}";
     }
-
 }
