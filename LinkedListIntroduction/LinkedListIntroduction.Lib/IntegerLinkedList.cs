@@ -1,5 +1,42 @@
 ﻿namespace LinkedListIntroduction.Lib;
 
+public class IntegerNode
+{
+    internal int _value;
+    internal IntegerNode _next;
+
+    internal int Count => _next == null ? 1 : 1 + _next.Count;
+            
+    internal int Sum => _next == null ? _value : _value + _next.Sum;
+
+
+    internal IntegerNode(int v)
+    {
+        _value = v;
+        _next = null;
+    }
+
+    internal void Append(int v)
+    {
+        if (_next == null)
+            _next = new IntegerNode(v);
+        else
+            _next.Append(v);
+    }
+
+    internal bool Contains(int v)
+    {
+        if (_value == v) return true;
+        return _next != null && _next.Contains(v);
+    }
+
+    public override string ToString()
+    {
+        return _next == null ? _value.ToString() : $"{_value}, {_next}";
+    }
+}
+
+
 public class IntegerLinkedList
 {
     protected IntegerNode _head;
@@ -155,42 +192,7 @@ public class IntegerLinkedList
 
 
 
-public class IntegerNode
-{
-    internal int _value;
-    internal IntegerNode _next;
 
-    internal int Count => _next == null ? 1 : 1 + _next.Count;
-            
-    internal int Sum => _next == null ? _value : _value + _next.Sum;
-
-
-    internal IntegerNode(int v)
-    {
-        _value = v;
-        _next = null;
-    }
-
-    internal void Append(int v)
-    {
-        if (_next == null)
-            _next = new IntegerNode(v);
-        else
-            _next.Append(v);
-    }
-    internal bool Contains(int v)
-    {
-        if (_value == v) return true;
-        return _next != null && _next.Contains(v);
-    }
-
-    
-    public override string ToString()
-    {
-        return _next == null ? _value.ToString() : $"{_value}, {_next}";
-    }
-
-}
 
 public class SortedIntegerLinkedList : IntegerLinkedList
 {
